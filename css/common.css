@@ -1,0 +1,5 @@
+html, body { padding: 0; margin: 0; }
+
+#taskBar { background-color: black; position: absolute; left: 0; right: 0; bottom: 0; }
+#taskBar img { padding: 6px 11px; display: block; }
+#taskBar img:hover { opacity: 0.5; background-color: #404040; }
