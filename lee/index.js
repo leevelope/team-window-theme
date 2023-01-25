@@ -62,23 +62,27 @@ for (let i = 0; i < inner.length; i++) {
     function() {
       console.log (this);
 
-      let nayoung;
+      // let nayoung;
 
-      if(i==0){
-              nayoung = "내 컴퓨터입니다"; 
-            } else if(i==1){
-              nayoung = "자료실 입니다.";
-            } else if(i==2){
-              nayoung = "TimeLine 입니다.";
-              // modal.classList.add("medium");
+      // if(i==0){
+      //         nayoung = "내 컴퓨터입니다";
+      //       } else if(i==1){
+      //         nayoung = "자료실 입니다.";
+      //       } else if(i==2){
+      //         nayoung = "TimeLine 입니다.";
+      //         // modal.classList.add("medium");
         
-            } else if(i==3){
-              nayoung = "Portfolio 입니다.";
-            }else{
-              nayoung = "Contact 입니다.";
-            }
+      //       } else if(i==3){
+      //         nayoung = "Portfolio 입니다.";
+      //       }else{
+      //         nayoung = "Contact 입니다.";
+      //       }
           
-      showModal(this.querySelector('p').textContent, nayoung, 200 + (Math.random() * 100), 300 + (Math.random() * 100))
+      showModal(this.querySelector('p').textContent, 200 + (Math.random() * 100), 300 + (Math.random() * 100))
+    
+    
+
+
     }
   );
 }
@@ -87,7 +91,41 @@ for (let i = 0; i < inner.length; i++) {
 
 // const aa = document.querySelector(".modal .title > div").textContent;
 
-function showModal(title, content, x, y) {
+function showModal(title, x, y) {
+
+  const modals = [...document.querySelectorAll(".modal .title > div")];
+  for (const i in modals) {
+    if (modals[i].textContent == title) return;
+  }
+
+  let nayoung = "";
+  if(title=="내 컴퓨터"){
+    nayoung = "내 컴퓨터입니다";
+  } else if(title=="자료실"){
+    nayoung = "자료실 입니다.";
+  } else if(title=="TimeLine"){
+    nayoung = "TimeLine 입니다.";
+  } else if(title=="Portfolio"){
+    nayoung = "Portfolio 입니다.";
+  }else{
+    nayoung = "Contact 입니다.";
+  }
+
+  /*
+  for (const m of modals) {
+    if (m.textContent == title) return;
+  }
+  */
+ /*
+  for (const modal of [...document.querySelectorAll(".modal .title > div")]) {
+    m.textContent;
+  }
+ */
+
+
+
+
+
   // const findModal = document.querySelectorAll('.modal');
   //  for(let i = 0; i < inner.length; i++){
   //   if(title==aa) return;
@@ -112,19 +150,27 @@ function showModal(title, content, x, y) {
 
 
   
-  document.querySelector('.close').addEventListener('click',function(){
-  console.log("모달닫기");
-  // 삭제가 아니라 숨기기만함 // 계속 생성되는데 하나만 숨김 처리되니까 첫번째 none 말곤 작동x
-  // document.querySelector('.modal').style.display = "none";
-  // 한개당 하나의 삭제가 아니라 여러창이 띄워져있어도 처음 띄워진 모달창에 close를 누르면 전체 다 삭제 됨.
-  document.querySelector('.modal').remove();
+  modal.querySelector('.close').addEventListener('click',function(){
+  modal.remove();
 })
   
 }
 
 
+// let isButtonClicked = false;
+// if (isButtonClicked) { // boolean
+//   // dasd
+//   isButtonClicked = false;
+// } else {
+//   // 버튼이 눌렸을 때
+//   isButtonClicked = true;
+// }
 
+// let kk = document.querySelector(".modal .title > div");
 
+// if(kk >= 1){
+//   isButtonClicked = false;
+// }
 
 
 
@@ -151,21 +197,15 @@ function showModal(title, content, x, y) {
 const start =document.querySelector('.start');
 const startmodal = document.querySelector('.startmodal');
 start.addEventListener('click',function(){
-  startmodal.classList.toggle('toggle');
+  startmodal.classList.toggle('hide');
+  start.classList.toggle('shadow');
 })
 
 // 바탕화면을 눌러도 start 창이 닫아지게
 document.querySelector('#main').addEventListener('click', function(){
-  startmodal.classList.add('toggle');
+  startmodal.classList.add('hide');
+  start.classList.remove('shadow');
 })
-
-start.addEventListener('click',function(){
-  start.classList.toggle('shadow');
-  // if(startmodal.class='shadow'){
-  //   document.querySelector('#footer > ul > li.start').style = "background-color : rgb(30 30 30)";
-  // }
-})
-
 
 // 인식 안 됨
 // if(startmodal.style.display=="block"){
@@ -211,25 +251,25 @@ for(let i = 0; i<p.length; i++){
 
 
 // 기존창만 바뀜 한번에 2개이상 창이 띄워지지 않음 -> 생성으로 바꾸던가 / 만들어진 기존창만 띄우던가
-const fticon = document.querySelectorAll('.fticon')
-for (let i = 0; i < fticon.length; i++) {
-  fticon[i].addEventListener('click',
-  function() {
-    let title = document.querySelector('.modal > .title > div');
-        if(i==0){
-              document.querySelector('title').textContent = "내 컴퓨터";
-              document.querySelector('.content').textContent = "내 컴퓨터입니다";
-              } else if(i==1){
-                document.querySelector('title').textContent = "Contact";
-                document.querySelector('.content').textContent = "Contact입니다";
-              }
+// const fticon = document.querySelectorAll('.fticon')
+// for (let i = 0; i < fticon.length; i++) {
+//   fticon[i].addEventListener('click',
+//   function() {
+//     let title = document.querySelector('.modal > .title > div');
+//         if(i==0){
+//               document.querySelector('title').textContent = "내 컴퓨터";
+//               document.querySelector('.content').textContent = "내 컴퓨터입니다";
+//               } else if(i==1){
+//                 document.querySelector('title').textContent = "Contact";
+//                 document.querySelector('.content').textContent = "Contact입니다";
+//               }
   
-    document.querySelectorAll('.fticon')[i].addEventListener('click', function(){
-      document.querySelector('.modal').style.display = "block";
-    })
-  }
+//     document.querySelectorAll('.fticon')[i].addEventListener('click', function(){
+//       document.querySelector('.modal').style.display = "block";
+//     })
+//   }
   
-)}
+// )}
 
 
 

@@ -200,11 +200,14 @@ li{
 }
 
 
-.open{
+/* .open{
     display: block;
 }
 
 .toggle{
+    display: none;
+} */
+.hide {
     display: none;
 }
 
