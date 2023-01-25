@@ -42,7 +42,12 @@ function showModal(title, x, y) {
 
   const modals = [...document.querySelectorAll(".modal .title > div")];
   for (const i in modals) {
-    if (modals[i].textContent == title) return;
+    if (modals[i].textContent == title) {
+
+      document.querySelectorAll('.modal')[i].style.display = "";
+      return;
+    }
+    
   }
 
   let content = "";
@@ -74,7 +79,8 @@ function showModal(title, x, y) {
 
 
   modal.querySelector('.close').addEventListener('click', function () {
-    modal.remove();
+    // modal.remove();
+    modal.style.display = "none";
   });
 
 
