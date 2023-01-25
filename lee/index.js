@@ -37,7 +37,7 @@ for (let i = 0; i < inner.length; i++) {
     );
 }
 
-let zIndex = 1;
+
 function showModal(title, x, y) {
 
     const modals = [...document.querySelectorAll(".modal .title > div")];
@@ -82,12 +82,12 @@ function showModal(title, x, y) {
         modal.style.display = "none";
     });
 
-
+    // Z-index 처리
     modal.addEventListener('click', function(){
-        
-        modal.style.zIndex = zIndex++;
-
-        // alert(zIndex);
+        for (const i of document.querySelectorAll(".modal")) {
+            i.style.zIndex = "";
+        }            
+        modal.style.zIndex = 1;
     })
 
     // 마우스의 기본상태
