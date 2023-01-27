@@ -221,3 +221,12 @@ li{
 #footer > ul > .fticon > p {
     display: none;
 }
+
+
+.content{
+    height: 175px;
+}
+
+.content>div{
+    height: 100%;
+}

@@ -60,7 +60,8 @@ function showModal(title, x, y) {
     } else if (title == "Portfolio") {
         content = "Portfolio 입니다.";
     } else {
-        content = "Contact 입니다.";
+        // content = "Contact 입니다.";
+        content = `<div onclick="window.open('https://www.naver.com');" style="cursor:pointer;">ㅎㅇ</div>`
     }
 
     const modal = document.createElement("div");
