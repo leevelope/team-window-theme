@@ -24,15 +24,22 @@ setInterval(clock, 1000); // 1초마다 실행
 
 // 메인 ////////////////////////////////////////////////////////////////////////
 
+// 미디어쿼리 js -> 화면이 좁아졌을 때
+function random(min, max){ // min 30, max 70
+    return Math.floor(min + (Math.random() * (max - min + 1)));
+}
+
+
 
 const inner = document.querySelectorAll(".inner");
+
+
 for (let i = 0; i < inner.length; i++) {
+
     inner[i].addEventListener('click',
         function () {
             // console.log (this);
-
-            showModal(this.querySelector('p').textContent, 200 + (Math.random() * 100), 300 + (Math.random() * 100))
-
+                showModal(this.querySelector('p').textContent, 200 + (Math.random() * 100), 300 + (Math.random() * 100))
         }
     );
 }
@@ -61,7 +68,7 @@ function showModal(title, x, y) {
         content = "Portfolio 입니다.";
     } else {
         // content = "Contact 입니다.";
-        content = `<div onclick="window.open('https://www.naver.com');" style="cursor:pointer;">ㅎㅇ</div>`
+        content = `<div onclick="window.open('https://www.naver.com');" style="cursor:pointer;">>클릭<</div>`
     }
 
     const modal = document.createElement("div");
@@ -73,10 +80,13 @@ function showModal(title, x, y) {
   `;
 
 
-    modal.style.left = x + "px";
-    modal.style.top = y + "px";
+    // modal.style.left = random(0, document.body.clientWidth - 200) + "px";
+    // modal.style.top = random(0, document.body.clientHeight - 200) + "px";
+    console.log("생성 직후 A", modal.clientWidth);
     document.querySelector(".modal-wrap").append(modal);
-
+    console.log("생성 직후 B", modal.clientWidth);
+    modal.style.left = random(0, document.body.clientWidth - 200) + "px";
+    modal.style.top = random(0, document.body.clientHeight - 200) + "px";
 
     modal.querySelector('.close').addEventListener('click', function () {
         // modal.remove();
@@ -84,10 +94,10 @@ function showModal(title, x, y) {
     });
 
     // Z-index 처리
-    modal.addEventListener('click', function(){
+    modal.addEventListener('click', function () {
         for (const i of document.querySelectorAll(".modal")) {
             i.style.zIndex = "";
-        }            
+        }
         modal.style.zIndex = 1;
     })
 
@@ -196,8 +206,5 @@ for (let i = 0; i < fticon.length; i++) {
 
 
 
-
-
-
-
+// let modal = document.querySelectorAll('.modal');
 
