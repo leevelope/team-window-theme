@@ -93,3 +93,13 @@ input{
 .font{
     text-align: center;
 }
+
+.closeBtn{
+    width: 150px;
+    margin: 0 auto;
+}
+
+.closeAll{
+    width: 150px;
+    margin: 0 auto;
+}
