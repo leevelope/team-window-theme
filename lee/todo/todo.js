@@ -4,103 +4,95 @@ let inner = document.querySelector('.inner');
 let closeAll = document.querySelector('.closeAll');
 let todolist = document.querySelector('.todolist');
 
-function add(){
+
+
+// let data = [];
+// localStorage.setItem('todo', data);
+// localStorage.removeItem('todo');
+let data = JSON.parse(localStorage.getItem('todo')) || [];
+// if (!data) data = [];
+// data ||= [];
+console.log(data);
+for (const show of data) {
+    makeListItem(show);
+}
+
+// 추가함수
+function makeListItem(memo){ // 리스트에 항목을 생성하여 추가함
+    if (!memo) return;
+    // memo = 첫번째 인자의 내용
     const list = document.createElement('li');
     list.className = "todolist";
-    console.log(input);
-    if(!input.value){
-        alert('내용을 입력해주세요');
-    }else{
-        list.innerHTML = input.value;
+    // console.log(input);
+
+        list.innerHTML = memo;
         inner.append(list);
-        input.value = "";
-    }
+        // input.value = "";
+
     list.addEventListener('click', function(){     
         list.classList.toggle('line');
     })
-    list.addEventListener('dblclick', function(){   
+    list.addEventListener('dblclick', function(){
+
+        const idx = [...inner.children].indexOf(this);
         inner.removeChild(list);
+        // localStorage.removeItem('todo'.this);
+        console.log("클릭한 li의 index는 "+idx);
+        data.splice(idx, 1);
+        localStorage.setItem('todo', JSON.stringify(data));;
+        // console.log("지워진 내용은", this)
     })
 }
 
+ // input.value 값 검사 및 makeListItem에 전달
+function add(){
+    if (!input.value) {
+        alert("내용을 입력해주세요.");
+        return;
+    }
+    makeListItem(input.value);
+    data.push(input.value);
+    localStorage.setItem('todo', JSON.stringify(data));
+    input.value = "";
+}
+
+
+// if(!memo){
+//     alert('내용을 입력해주세요');
+// }else{
+//     input.value = "";
+// }
 
 
 
+// 클릭시
 btn.addEventListener('click', function(){
-    // const list = document.createElement('li');
-    // list.className = "todolist";
-    // console.log(input);
-    // if(!input.value){
-    //     alert('내용을 입력해주세요');
-    //     // console.log('왜 안나오냐');
-    // }else{
-    //     list.innerHTML = input.value;
-    //     inner.appendChild(list);
-    //     input.value = "";
-    // }
-    // // li에 클릭시 줄긋기/줄긋기 지우기
-    // list.addEventListener('click', function(){
-    //     list.classList.toggle('line');
-    // })
-    // // li에 더블클릭시 줄 삭제
-    // list.addEventListener('dblclick', function(){
-    // })
      add();
 })
 
-
+// 엔터 입력시
 input.addEventListener('keypress', (e)=>{
     if( e.key === 'Enter'){
-    // const list = document.createElement('li');
-    // list.className = "todolist";
-    // console.log(input);
-    // if(!input.value){
-    //     alert('내용을 입력해주세요');
-    //     // console.log('왜 안나오냐');
-    // }else{
-    //     list.innerHTML = input.value;
-    //     inner.appendChild(list);
-    //     input.value = "";
-    // }
-    // // li에 클릭시 줄긋기/줄긋기 지우기
-    // list.addEventListener('click', function(){
-    //     list.classList.toggle('line');
-    // })
-    // // li에 더블클릭시 줄 삭제
-    // list.addEventListener('dblclick', function(){
-    //     inner.removeChild(list);
-    // })
     add();
     }
 })
 
-
-
-
+// 모두닫기
     let innerChild = inner.children;
 
-    console.log(closeAll);
+    // console.log(closeAll);
     closeAll.addEventListener('click', function(){
-        // for(let i=0; i<innerChild.length; i++){
-        //     inner.removeChild(innerChild[i]);
-        //     console.log("1",innerChild);
-        //     console.log("2", innerChild[i]);
-        //     console.log(i);
-        // }
-        // while(inner.children.length) inner.removeChild(inner.children[0]);
+
         while(inner.children.length) inner.removeChild(inner.firstChild);
-    })    
+        data = [];
+        localStorage.setItem('todo', JSON.stringify(data));
+    })
 
 
-
-
-
-// function close(){
-
-//     closeAll.addEventListener('click', function(){
-//         console.log('빠밤');
-//         for(let i=0; i<todolist.length; i++){
-//             inner.removeChild(todolist[i]);
-//         }
-//     })    
-// }
+    // function refresh(){
+    //     data = [];
+    //     for (const addinnerChild of inner.children) {
+    //         data.push(addinnerChild.innerHTML);
+    //         console.log(addinnerChild);
+    //     }
+    // }
